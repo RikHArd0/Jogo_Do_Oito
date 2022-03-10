@@ -216,7 +216,7 @@ public class Jogo extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponents(g);
+        super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         drawGrid(g2D);
