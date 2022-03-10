@@ -156,4 +156,31 @@ public class Jogo extends JFrame {
 
         return true;
     }
+
+    private void drawGrid(Graphics2D g) {
+        for (int i = 0; i < tiles.length; i++) {
+            //Converter coordenadas 1D em coordenadas 2D visto o tamanho do Array 2D
+            int r = i / size;
+            int c = i % size;
+            int x = margin + c * tileSize;
+            int y = margin + r * tileSize;
+
+            if (tiles[i] == 0) {
+                if (gameOver) {
+                    g.setColor(FOREGROUND_COLOR);
+                    drawCenteredString(g, "\u2713", x, y);
+                }
+
+                continue;
+            }
+
+            g.setColor(getForeground());
+            g.fillRoundRect(x, y, tileSize, tileSize, 25, 25);
+            g.setColor(Color.BLACK);
+            g.drawRoundRect(x, y, tileSize, tileSize, 25, 25);
+            g.setColor(Color.WHITE);
+
+            drawCenteredString(g, String.valueOf(tiles[i]), x, y);
+        }
+    }
 }
