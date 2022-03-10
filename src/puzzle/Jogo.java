@@ -1,12 +1,24 @@
 package puzzle;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-public class Jogo extends JFrame {
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+// Criação do jogo dos 8 com Java e Swing
+
+public class Jogo extends JPanel {
     // Tamanho da instacia do jogo
     private int size;
     // Número de camadas
@@ -30,7 +42,7 @@ public class Jogo extends JFrame {
     // Verdadeiro para Fim de Jogo e Falso para outro resultado
     private boolean gameOver;
 
-    public GameOfEight(int size, int dim, int mar) {
+    public Jogo(int size, int dim, int mar) {
         this.size = size;
         dimension = dim;
         margin = mar;
@@ -200,5 +212,27 @@ public class Jogo extends JFrame {
         int desc = fm.getDescent();
         g.drawString(s, x + (tileSize - fm.stringWidth(s)) / 2,
                 y + (asc + (tileSize - (asc + desc)) / 2));
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponents(g);
+        Graphics2D g2D = (Graphics2D) g;
+        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        drawGrid(g2D);
+        drawStartMessage(g2D);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setTitle("Jogo do 8");
+            frame.setResizable(false);
+            frame.add(new Jogo(3, 550, 30), BorderLayout.CENTER);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 }
