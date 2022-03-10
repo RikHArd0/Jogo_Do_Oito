@@ -183,4 +183,22 @@ public class Jogo extends JFrame {
             drawCenteredString(g, String.valueOf(tiles[i]), x, y);
         }
     }
+    private void drawStartMessage(Graphics2D g) {
+        if (gameOver) {
+            g.setFont(getFont().deriveFont(Font.BOLD, 18));
+            g.setColor(FOREGROUND_COLOR);
+            String s = "Clique para começar um Novo Jogo";
+            g.drawString(s, (getWidth() - g.getFontMetrics().stringWidth(s)) / 2,
+                    getHeight() - margin);
+        }
+    }
+
+    private void drawCenteredString(Graphics2D g, String s, int x, int y) {
+        // Centraliza a string S para o bloco escolhido (x,y)
+        FontMetrics fm = g.getFontMetrics();
+        int asc = fm.getAscent();
+        int desc = fm.getDescent();
+        g.drawString(s, x + (tileSize - fm.stringWidth(s)) / 2,
+                y + (asc + (tileSize - (asc + desc)) / 2));
+    }
 }
