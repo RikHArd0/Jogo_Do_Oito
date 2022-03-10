@@ -107,4 +107,13 @@ public class Jogo extends JFrame {
 
         newGame();
     }
+
+    private void newGame() {
+        do {
+            reset(); // Resetar para o estado inicial
+            shuffle(); // Embaralha as peças
+        } while (!isSolvable()); //
+
+        gameOver = false;
+    }
 }
