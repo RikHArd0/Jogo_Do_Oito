@@ -116,4 +116,21 @@ public class Jogo extends JFrame {
 
         gameOver = false;
     }
+    private void reset() {
+        for (int i = 0; i < tiles.length; i++) {
+            tiles[i] = (i + 1) % tiles.length;
+        }
+
+        blankPos = tiles.length - 1;
+    }
+
+    private void shuffle() {
+        int n = nbTiles;
+        while (n > 1) {
+            int r = RANDOM.nextInt(n--);
+            int tmp = tiles[r];
+            tiles[r] = tiles[n];
+            tiles[n] = tmp;
+        }
+    }
 }
