@@ -133,4 +133,27 @@ public class Jogo extends JFrame {
             tiles[n] = tmp;
         }
     }
+    private boolean isSolvable() {
+        int countInversions = 0;
+        for (int i = 0; i < nbTiles; i++) {
+            for (int j = 0; j < i; j++) {
+                if (tiles[j] > tiles[i])
+                    countInversions++;
+            }
+        }
+
+        return countInversions % 2 == 0;
+    }
+
+    private boolean isSolved() {
+        if (tiles[tiles.length - 1] != 0) // Se o espaço em branco não estiver na posição de resolvido ==> não resolvido
+            return false;
+
+        for (int i = nbTiles - 1; i >= 0; i--) {
+            if (tiles[i] != i + 1)
+                return false;
+        }
+
+        return true;
+    }
 }
